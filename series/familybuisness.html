@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Business</title>
+    <style>
+        /* Styles généraux */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2e2a1f; /* Couleur de fond sombre inspirée de la série */
+            color: #f0e6d2; /* Couleur du texte beige */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        /* Conteneur principal */
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+            box-sizing: border-box;
+            background-image: url('https://www.premiere.fr/sites/default/files/styles/scale_crop_1280x720/public/2020-09/FamilyBusiness_Vertical_Main_RGB_FR_PRE.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(75%);
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Bouton de retour */
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid #ff6347; /* Rouge tomate pour rappeler l'humour et l'urgence */
+            padding: 12px 24px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            color: #ff6347;
+            font-weight: bold;
+        }
+
+        .return-button:hover {
+            background-color: rgba(255, 99, 71, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Contenu principal */
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Section des informations */
+        .info-wrapper {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .info {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 99, 71, 0.8);
+        }
+
+        .info h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #ff6347;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        .info p {
+            font-size: 1.3em;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #f0e6d2;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            background-color: #4a4e69; /* Un ton violet-gris pour un aspect sérieux */
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+            color: #f0e6d2;
+            font-weight: bold;
+        }
+
+        .buttons button:hover {
+            background-color: #6c757d; /* Un ton plus clair au survol */
+            transform: scale(1.05);
+        }
+
+        /* Tableau des épisodes */
+        .episodes {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 99, 71, 0.8);
+        }
+
+        .episodes table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .episodes th,
+        .episodes td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .episodes th {
+            background-color: #6c757d; /* Un gris moyen pour les en-têtes */
+            color: #f0e6d2;
+            font-size: 1.3em;
+        }
+
+        .episodes td {
+            background-color: #4a4e69; /* Fond des cellules */
+            border: 1px solid #6c757d;
+            color: #f0e6d2;
+        }
+
+        .episodes a {
+            color: #ff6347; /* Liens en rouge tomate */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .episodes a:hover {
+            text-decoration: underline;
+        }
+
+        /* Section vidéo */
+        .video-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .video-section iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .video-section .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid #ff6347;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            color: #ff6347;
+            font-weight: bold;
+        }
+
+        .video-section .back-button:hover {
+            background-color: rgba(255, 99, 71, 0.3);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="/series\serie.html" class="return-button" id="returnButton">Retour</a>
+
+        <div class="content-wrapper">
+            <!-- Section des informations -->
+            <div class="info-wrapper">
+                <div class="info">
+                    <h1>MXFlix <br> Family Business</h1>
+                    <p>2019 • Comédie, Drame</p>
+                    <p>"Family Business" est une série française qui suit une famille qui décide de se lancer dans la culture du cannabis après avoir découvert une opportunité légale. L'histoire mélange l'humour avec des situations de plus en plus folles à mesure que la famille s'enfonce dans ce nouveau "business".</p>
+                    <div class="buttons">
+                        <button id="trailerButton">Bande-annonce</button>
+                        <button id="favoriteButton">Favoris</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section du tableau des épisodes -->
+            <div class="episodes">
+                <table>
+                    <tr>
+                        <th colspan="2">Saison 1</th>
+                    </tr>
+                    <tr>
+                        <td><a href="https://uqload.to/a9czazabuv24.html" target="_blank">Épisode 1</a></td>
+                        <td><a href="https://uqload.to/juo4jz3xm5z2.html" target="_blank">Épisode 2</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://uqload.to/vvdiym79em7m.html" target="_blank">Épisode 3</a></td>
+                        <td><a href="https://uqload.to/rv35k2i39aa1.html" target="_blank">Épisode 4</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://uqload.to/hk4c1kkvldkv.html" target="_blank">Épisode 5</a></td>
+                        <td><a href="https://uqload.to/nuxat6ukylkf.html" target="_blank">Épisode 6</a></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Saison 2</th>
+                    </tr>
+                    <tr>
+                        <td><a href="https://uqload.to/ykii6yxs6h70.html" target="_blank">Épisode 1</a></td>
+                        <td><a href="https://uqload.to/ntcr9zehmgcd.html" target="_blank">Épisode 2</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://uqload.to/sip5oatby19s.html" target="_blank">Épisode 3</a></td>
+                        <td><a href="https://uqload.to/l92yzm0v2fwx.html" target="_blank">Épisode 4</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://uqload.to/x1yza4mhzbvf.html" target="_blank">Épisode 5</a></td>
+                        <td><a href="https://uqload.to/gx1x67mq42aa.html" target="_blank">Épisode 6</a></td>
+                    </tr>
+                </table>
+                        </div>
+                    </div>
+                    
+ 
+
+    <!-- Section pour la vidéo -->
+    <div class="video-section" id="videoSection">
+        <button class="back-button" id="backButton">Retour</button>
+        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Script pour gérer la vidéo
+        document.getElementById('trailerButton').addEventListener('click', function () {
+            document.getElementById('videoSection').style.display = 'flex';
+            document.getElementById('videoPlayer').src = 'https://www.youtube.com/embed/-zQbtUVjed4?si=b4QztxlhQgvWPafP'; // URL de la bande-annonce
+        });
+
+        document.getElementById('backButton').addEventListener('click', function () {
+            document.getElementById('videoSection').style.display = 'none';
+            document.getElementById('videoPlayer').src = '';
+        });
+      // Fonction pour ajouter ou retirer des favoris
+      document.getElementById('favoriteButton').addEventListener('click', function() {
+            // Informations sur le film à stocker
+            const movie = {
+                title: 'Game Of Throne',
+                image: 'https://i.redd.it/h7uga1bv24fz.jpg'
+            };
+
+            // Récupérer la liste des favoris depuis le localStorage
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+            // Vérifier si le film est déjà dans les favoris
+            const movieIndex = favorites.findIndex(fav => fav.title === movie.title);
+
+            if (movieIndex !== -1) {
+                // Le film est déjà dans les favoris, le retirer
+                favorites.splice(movieIndex, 1);
+                alert('Le film a été retiré de vos favoris.');
+            } else {
+                // Ajouter le film aux favoris
+                favorites.push(movie);
+                alert('Le film a été ajouté à vos favoris !');
+            }
+
+            // Mettre à jour le localStorage
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+    </script>
+</body>
+
+</html>
+

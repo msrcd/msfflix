@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Premium</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 100px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 36px;
+            color: #333;
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #555;
+        }
+        .error-message {
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="premiumContent">
+        <h1>Bienvenue dans la section Premium</h1>
+        <p class="message">Vous avez accès à ce contenu exclusif en tant qu'abonné.</p>
+    </div>
+
+    <div class="container error-message" id="errorMessage" style="display: none;">
+        <h1>Accès Refusé</h1>
+        <p>Vous devez avoir un abonnement actif pour accéder à cette page.</p>
+    </div>
+
+    <script>
+        // Vérifier l'abonnement via une API
+        fetch('/api/check-subscription', {
+            method: 'GET',
+            credentials: 'include' // Pour envoyer automatiquement les cookies (session)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.isSubscribed) {
+                // Si l'utilisateur n'est pas abonné, afficher le message d'erreur
+                document.getElementById('premiumContent').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la vérification de l\'abonnement:', error);
+        });
+    </script>
+</body>
+</html>
